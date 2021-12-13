@@ -1,0 +1,37 @@
+#!=======================================================================!
+#!    This file is part of SAMOA system                                       !
+#!    Engineered by Manel Grifoll (LIM/UPC)                                  !
+#!                                                                       !
+#        Per corre:
+#      make -f mkinter         o make -f mkinter clean
+#
+#!=======================================================================!
+
+
+INCLUDEDIRS = -I/usr/local/netcdf-f-If/include   -I/usr/local/mpichIf/include
+LIBDIRS = -L/usr/local/netcdf-f-If/lib 
+LIBS = -lnetcdff 
+FCFLAGS = $(INCLUDEDIRS)
+LDFLAGS =  -L/usr/local/netcdf-f-If/lib -lnetcdff -L/usr/local/netcdfIf/lib  -lnetcdf -L/usr/local/hdf5If/lib -lhdf5_hl -lhdf5 -L/usr/local/pnetcdfIf/lib -lpnetcdf -lcurl -lm   -ldl -lz 
+FC = /usr/local/mpichIf/bin/mpif90 -O3 -w  
+FONTS =  mod_kinds.f90 variables.f90 funcions.f90 ini.f90  get_grids.f90 set_depths.f90 main.f90 
+OBJECTS = $(FONTS:.f90=.o)
+EXECUTABLE = ../interpFtn
+
+
+$(EXECUTABLE): $(OBJECTS) 
+	$(FC)  -o $@ $^ $(LDFLAGS)
+#	$(FC)  -o $(EXECUTABLE_I) $(OBJECTS_I) $(LDFLAGS)
+
+%.o : %.f90
+	#$(FC) $(LDFLAGS) $(OBJECTS_I) -o $(EXECUTABLE_I)
+	$(FC) $(FCFLAGS) -c $<
+#$(EXECUTABLE_B): $(OBJECTS_) 
+#%.o : %.f90
+#	$(FC) $(LDFLAGS) $^ -o $@         #(EXECUTABLE_I)
+clean:
+	rm main.o
+	rm variables.o
+	rm funcions.o
+	rm set_depths.o
+	rm ../interpFtn
