@@ -1,0 +1,16 @@
+&DAT
+l_time_ih = 42 ,
+ l_time_iq=192,
+ GRD_NAME_o="./in/grd_cst_delta.nc",
+ arx_hm="./dat/cur-hor.nc",
+ nom_clm= "./dat/clim_bo.nc",
+ nom_bry="./dat/bry_bo.nc",
+ nom_ini="./dat/ini_bo.nc",
+/
+&PHISIC
+ theta_s_o=7 ,
+ theta_b_o=0.4 ,
+ hc_o=3,
+ Tcline_o=3,
+Niv_o=15,
+/
